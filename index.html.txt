@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quadra Trancada - Escape Room Digital</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="escape-container">
+    <header>
+      <h1>🔒 Quadra Trancada</h1>
+      <p class="subtitle">Escape Room Digital de Cidadania</p>
+    </header>
+
+    <!-- Painel do Cronômetro e Cadeado -->
+    <section class="timer-panel">
+      <div class="timer-box">
+        <span class="label">⏱️ TEMPO RESTANTE</span>
+        <span id="timer-display" class="timer">25:00</span>
+      </div>
+      <div class="lock-box">
+        <span class="label">🔐 CADEADO (5 DÍGITOS)</span>
+        <div class="passcode-display">
+          <span id="digit-1" class="digit">_</span>
+          <span id="digit-2" class="digit">_</span>
+          <span id="digit-3" class="digit">_</span>
+          <span id="digit-4" class="digit">_</span>
+          <span id="digit-5" class="digit">_</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tela do Jogo -->
+    <main id="room-screen">
+      <h2 id="room-title">Carregando...</h2>
+      <p id="room-desc">Aguarde o carregamento do enigma.</p>
+      
+      <div id="enigma-content" class="content-area"></div>
+
+      <div class="input-area">
+        <input type="text" id="answer-input" placeholder="Digite a resposta aqui..." autocomplete="off">
+        <button id="submit-btn" onclick="checkAnswer()">Enviar Resposta</button>
+      </div>
+
+      <div class="hint-section">
+        <button id="hint-btn" class="btn-secondary" onclick="useHint()">💡 Usar Dica (Restantes: <span id="hints-count">2</span>)</button>
+        <p id="hint-text" class="hint-text hidden"></p>
+      </div>
+    </main>
+
+    <!-- Modal de Vitoria/Derrota -->
+    <div id="end-modal" class="modal hidden">
+      <div class="modal-content">
+        <h2 id="modal-title"></h2>
+        <p id="modal-text"></p>
+        <button onclick="restartGame()" class="btn-secondary">🔄 Tentar Novamente</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
