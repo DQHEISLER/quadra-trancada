@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quadra Trancada - Escape Room Digital</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="game-container">
+    
+    <!-- TELA 1: MENU PRINCIPAL -->
+    <section id="screen-menu" class="screen active">
+      <div class="logo-area">
+        <span class="badge">ESCAPE ROOM DIGITAL</span>
+        <h1>🔒 QUADRA TRANCADA</h1>
+        <p>Reabra o espaço público resolvendo os enigmas da cidadania.</p>
+      </div>
+
+      <div class="menu-actions">
+        <button class="btn btn-primary" onclick="showScreen('screen-about')">🎮 Iniciar Jogo</button>
+        <button class="btn btn-secondary" onclick="showScreen('screen-rights')">⚖️ Ver Direitos & Regras</button>
+      </div>
+
+      <div class="high-score-board">
+        🏆 Recorde Local: <span id="best-time-display">--:--</span>
+      </div>
+    </section>
+
+    <!-- TELA 2: EXPLICAÇÃO DOS DIREITOS E REGRAS -->
+    <section id="screen-rights" class="screen">
+      <h2>⚖️ Direitos & Funcionamento</h2>
+      
+      <div class="info-scroll">
+        <h3>📚 Direitos Abordados neste Jogo:</h3>
+        <ul>
+          <li><strong>Direito ao Desporto e Lazer (Art. 217 CF):</strong> Fomento de práticas esportivas inclusivas e democráticas.</li>
+          <li><strong>Direito à Acessibilidade Universal (LBI):</strong> Eliminação de barreiras arquitetônicas para pessoas com deficiência.</li>
+          <li><strong>Direito à Gestão Democrática:</strong> Uso equitativo de espaços públicos sem monopolização.</li>
+        </ul>
+
+        <h3>🕹️ Como Jogar:</h3>
+        <ul>
+          <li>A quadra escolar está trancada por um cadeado de <strong>5 dígitos</strong>.</li>
+          <li>Você tem <strong>25 minutos</strong> para passar pelas 5 salas. Cada sala revela 1 dígito.</li>
+          <li>Respostas erradas aplicam <strong>-1 minuto de penalidade</strong>.</li>
+          <li>Sua equipe possui até <strong>2 Dicas</strong> disponíveis.</li>
+        </ul>
+      </div>
+
+      <button class="btn btn-primary" onclick="showScreen('screen-about')">Entendido! Continuar ➡️</button>
+    </section>
+
+    <!-- TELA 3: TELA DE CONTEXTO NARRATIVO -->
+    <section id="screen-about" class="screen">
+      <h2>📜 A Missão</h2>
+      <p class="story-text">
+        A quadra poliesportiva da escola foi interditada há 8 meses por má gestão e falta de acessibilidade. Moradores, estudantes e atletas adaptados estão sem local para treinar.
+        <br><br>
+        Sua equipe de conselheiros foi chamada para inspecionar o local e encontrar o código do cadeado principal. O tempo está correndo!
+      </p>
+      <button class="btn btn-success" onclick="startGame()">🚀 Começar Desafio!</button>
+    </section>
+
+    <!-- TELA 4: GAMEPLAY (O JOGO EM SI) -->
+    <section id="screen-game" class="screen">
+      <!-- Topo com Status -->
+      <div class="status-bar">
+        <div class="status-item">
+          <span class="status-label">⏱️ TEMPO</span>
+          <span id="timer-display" class="status-value highlight-red">25:00</span>
+        </div>
+        <div class="status-item">
+          <span class="status-label">🔐 CADEADO</span>
+          <div class="passcode-display">
+            <span id="digit-1" class="digit">_</span>
+            <span id="digit-2" class="digit">_</span>
+            <span id="digit-3" class="digit">_</span>
+            <span id="digit-4" class="digit">_</span>
+            <span id="digit-5" class="digit">_</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Barra de Progresso das Salas -->
+      <div class="progress-bar">
+        <div id="progress-fill" class="progress-fill"></div>
+      </div>
+
+      <!-- Área do Enigma Atual -->
+      <div id="room-card" class="room-card">
+        <h3 id="room-title">Carregando...</h3>
+        <p id="room-desc">...</p>
+        
+        <div id="enigma-content" class="enigma-box"></div>
+
+        <div class="input-group">
+          <input type="text" id="answer-input" placeholder="Digite a resposta exata..." autocomplete="off">
+          <button class="btn btn-primary" onclick="checkAnswer()">Confirmar ↵</button>
+        </div>
+
+        <div class="hint-container">
+          <button id="hint-btn" class="btn btn-small" onclick="useHint()">💡 Pedir Dica (<span id="hints-count">2</span>)</button>
+          <p id="hint-text" class="hint-text hidden"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TELA 5: GAMEOVER / VITÓRIA -->
+    <section id="screen-end" class="screen">
+      <div class="end-card">
+        <h2 id="end-title">🏆 VITÓRIA!</h2>
+        <p id="end-message">Parabéns!</p>
+
+        <div id="badges-container" class="badges-grid"></div>
+
+        <div class="end-stats">
+          <p>Tempo Restante: <strong id="final-time">00:00</strong></p>
+          <p>Dicas Utilizadas: <strong id="final-hints">0</strong></p>
+        </div>
+
+        <button class="btn btn-primary" onclick="showScreen('screen-menu')">🔄 Voltar ao Menu</button>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
